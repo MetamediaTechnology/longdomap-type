@@ -1,11 +1,86 @@
-import { EventName, LocationMode } from "./Event";
+declare enum EventName {
+    BeforeContextmenu = "beforeContextmenu",
+    BeforeTagPopup = "beforeTagPopup",
+    Click = "click",
+    ConnectionError = "connectionError",
+    Contextmenu = "contextmenu",
+    DoubleClick = "doubleClick",
+    Drag = "drag",
+    DrawCreate = "drawCreate",
+    DrawDelete = "drawDelete",
+    Drop = "drop",
+    Fullscreen = "fullscreen",
+    Geolocation = "geolocation",
+    GeolocationError = "geolocationError",
+    GuideComplete = "guideComplete",
+    GuideError = "guideError",
+    Idle = "idle",
+    LayerChange = "layerChange",
+    Location = "location",
+    Mousemove = "mousemove",
+    OverlayChange = "overlayChange",
+    OverlayClick = "overlayClick",
+    OverlayDrag = "overlayDrag",
+    OverlayDrop = "overlayDrop",
+    OverlayHover = "overlayHover",
+    OverlayLeave = "overlayLeave",
+    OverlayLoad = "overlayLoad",
+    OverlayUpdate = "overlayUpdate",
+    PathAnimationEnd = "pathAnimationEnd",
+    Pitch = "pitch",
+    PopupClose = "popupClose",
+    Ready = "ready",
+    Repaint = "repaint",
+    Resize = "resize",
+    Rotate = "rotate",
+    ToolbarChange = "toolbarChange",
+    TooltipChange = "tooltipChange",
+    Wheel = "wheel",
+    Zoom = "zoom",
+    ZoomRange = "zoomRange",
+    loadTile = "loadTile"
+}
+declare enum LocationMode {
+    Pointer = "POINTER",
+    Geolocation = "GEOLOCATION"
+}
+interface GeoJSONGeometry {
+    type: "Point" | "LineString" | "Polygon" | "MultiPoint" | "MultiLineString" | "MultiPolygon" | "GeometryCollection";
+    coordinates: any;
+}
+interface GeoJSONFeature {
+    type: "Feature";
+    geometry: GeoJSONGeometry;
+    properties: {
+        clickable?: boolean;
+        detail?: string;
+        draggable?: boolean;
+        icon?: {
+            url: string;
+            width: number;
+            height: number;
+            offset: [number, number];
+        };
+        title?: string;
+        visibleMax?: number;
+        visibleMin?: number;
+        visibleRange?: number;
+        [key: string]: any;
+    };
+    object?: any;
+    [key: string]: any;
+}
+interface OverlaysClickEvent {
+    _geojson: GeoJSONFeature;
+}
+
 /**
  * @interface Map
  * @description
  * Interface for interacting with the Longdo Map instance.
  * Provides methods and properties for controlling map view, overlays, events, layers, tags, UI, language, and more.
  */
-export interface Map {
+interface Map {
     /**
      * @property zoom
      * @description
@@ -577,3 +652,277 @@ export interface Map {
         [key: string]: any;
     };
 }
+
+interface PopupOptions {
+    /**
+     * HTML title of the popup.
+     * @default undefined (No title)
+     */
+    title?: string;
+    /**
+     * HTML detail content of the popup.
+     * @default undefined (No detail)
+     */
+    detail?: string;
+    /**
+     * Delegate function to set detail content.
+     * @param element The element to populate with detail.
+     * @default undefined (Load nothing)
+     */
+    loadDetail?: (element: Element) => void;
+    /**
+     * Custom HTML content, overrides detail parameter.
+     * @default undefined (As detail)
+     */
+    html?: string;
+    /**
+     * Delegate function to set custom HTML content.
+     * @param element The element to populate with custom content.
+     * @default undefined (Load nothing)
+     */
+    loadHtml?: (element: Element) => void;
+    /**
+     * Size of the popup.
+     * @default 'auto'
+     */
+    size?: ({
+        width?: number;
+        height?: number;
+    } | 'auto');
+    /**
+     * Show close button.
+     * @default true
+     */
+    closable?: boolean;
+}
+
+type CSSColor = string;
+declare enum LineStyle {
+    Solid = "solid",
+    Dashed = "dashed",
+    Dotted = "dotted"
+}
+interface Location {
+    lat: number;
+    lng: number;
+    rotation?: number;
+}
+interface Range {
+    minZoom: number;
+    maxZoom: number;
+}
+interface MarkerOptions {
+    labelOptions?: string;
+}
+interface Geometry {
+    /**
+     * @property title
+     * The title of the geometry.
+     */
+    title?: string;
+    /**
+     * @property detail
+     * The detail text of the geometry.
+     * This is additional information displayed in the geometry.
+     */
+    detail?: string;
+    /**
+     * @property label
+     * The label text of the geometry.
+     * This is displayed at the pivot point of the geometry.
+     */
+    label?: string;
+    /**
+     * @property markerOptions
+     * Options for the marker that shows at the pivot point of the geometry.
+     * This can include custom icons, offsets, and other marker properties.
+     * If not specified, the default marker will be used.
+     * @default undefined
+     * @example
+     * {
+     *   title: "My Geometry",
+     *   icon: {
+     *     url: "https://example.com/icon.png",
+     *     offset: { x: 0, y: 0 },
+     *     size: { width: 24, height: 24 }
+     *   }
+     * }
+     */
+    markerOptions?: MarkerOptions;
+    /**
+     * @property popup
+     * Options for the popup that shows when the geometry is clicked.
+     * This can include title, detail, and custom HTML content.
+     * If not specified, the detail parameter will be used as the popup content.
+     * @default undefined
+     */
+    popup?: PopupOptions;
+    /**
+     * @property style
+     * Custom CSS styles for the geometry.
+     * This can include colors, sizes, and other visual properties.
+     * If not specified, default styles will be applied.
+     * @default undefined
+     */
+    style?: any;
+    visibleRange?: Range;
+    /**
+     * @property lineWidth
+     * The width of the geometry's outline.
+     * This is applicable for geometries like polygons and polylines.
+     * @default 3
+     */
+    lineWidth?: number;
+    /**
+     * @property fillColor
+     * The fill color of the geometry.
+     * This is applicable for geometries like polygons.
+     * If not specified, the geometry will not be filled.
+     * @default undefined
+     */
+    lineColor?: CSSColor;
+    /**
+     *
+     * @property fillColor
+     * The fill color of the geometry.
+     * This is applicable for geometries like polygons.
+     * If not specified, the geometry will not be filled.
+     * @default undefined
+     *
+     */
+    fillColor?: CSSColor;
+    /**
+     *
+     * @property lineStyle
+     * The style of the geometry's outline.
+     * This can be set to solid, dashed, or dotted.
+     * If not specified, the default style is solid.
+     * @default LineStyle.Solid
+     */
+    lineStyle?: LineStyle;
+    pivot?: Location;
+    clickable?: boolean;
+    draggable?: boolean;
+    pointer?: boolean;
+    weight?: number;
+}
+
+interface LongdoMarkerProps {
+    /**
+      * The Longdo map instance where the popup will be displayed.
+      * This is required to add the popup overlay to the map.
+     */
+    map?: any;
+    /**
+     * @property position
+     * The position of the popup on the map.
+     * It should be an object with `lon` and `lat` properties.
+     */
+    position: {
+        lon: number;
+        lat: number;
+    };
+    /**
+    * The title of the marker.
+    * @default Null
+    * The title is displayed at the top of the marker.
+    */
+    title?: string;
+    /**
+     * The icon of the marker.
+     * This can be a URL to an image or an object with `url` and optional `offset`.
+     * @default Null
+     */
+    icon?: {
+        url: string;
+        offset?: {
+            x: number;
+            y: number;
+        };
+    };
+    /**
+     * The detail text of the marker.
+     * This is additional information displayed in the marker.
+     * @default Null
+     */
+    detail?: string;
+    /**
+     * The visible range of the marker.
+     * This is an object with `min` and `max` properties, defining the zoom levels at which the marker is visible.
+     * @default Null
+     */
+    visibleRange?: {
+        min: number;
+        max: number;
+    };
+    /**
+     * Determines whether the marker is draggable.
+     * If set to `true`, the marker can be moved by the user.
+     * @default false
+     */
+    draggable?: boolean;
+}
+
+declare namespace LongdoLayers {
+    const NORMAL = "NORMAL";
+    const SATELLITE = "SATELLITE";
+    const HYBRID = "HYBRID";
+    const TERRAIN = "TERRAIN";
+    const DARK = "DARK";
+    const TRAFFIC = "TRAFFIC";
+    const POLITICAL = "POLITICAL";
+    const POI = "POI";
+}
+declare namespace LongdoMap {
+    interface MapConstructorOptions {
+        placeholder: string | HTMLElement;
+        options?: {
+            lat?: number;
+            lng?: number;
+            zoom?: number;
+            lastview?: boolean;
+            language?: string;
+        };
+    }
+    interface MapInstance extends Map {
+    }
+    interface Layers {
+        NORMAL: string;
+        SATELLITE: string;
+        HYBRID: string;
+        TERRAIN: string;
+        DARK: string;
+        TRAFFIC: string;
+        POLITICAL: string;
+        POI: string;
+    }
+    interface GeometryConstructor {
+        new (data: any, options?: Geometry): any;
+    }
+    interface MarkerConstructor {
+        new (location: {
+            lon: number;
+            lat: number;
+        }, options?: LongdoMarkerProps): any;
+    }
+    interface PopupConstructor {
+        new (options?: PopupOptions): any;
+    }
+}
+interface LongdoGlobal {
+    Map: {
+        new (options: LongdoMap.MapConstructorOptions): LongdoMap.MapInstance;
+    };
+    Layers: LongdoMap.Layers;
+    Geometry: LongdoMap.GeometryConstructor;
+    Marker: LongdoMap.MarkerConstructor;
+    Popup: LongdoMap.PopupConstructor;
+    [key: string]: any;
+}
+declare global {
+    interface Window {
+        longdo: LongdoGlobal;
+    }
+}
+
+export { type CSSColor, EventName, type GeoJSONFeature, type GeoJSONGeometry, type Geometry, LineStyle, type Location, LocationMode, type LongdoGlobal, LongdoLayers, LongdoMap, type LongdoMarkerProps, type Map, type MarkerOptions, type OverlaysClickEvent, type PopupOptions, type Range, LongdoMap as default };
