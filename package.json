@@ -1,0 +1,43 @@
+{
+  "name": "@longdomap/types",
+  "version": "1.0.0",
+  "description": "Internal TypeScript definitions for Longdo Map libraries",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && npm run build:esm",
+    "build:esm": "tsc --module esnext --outDir dist/esm && mv dist/esm/index.js dist/index.esm.js && rm -rf dist/esm",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "pack-test": "npm pack --dry-run",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "longdo",
+    "longdomap",
+    "map",
+    "typescript",
+    "interface",
+    "types",
+    "definitions",
+    "internal"
+  ],
+  "private": false,
+  "author": "Longdo Map Team",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetamediaTechnology/longdomap-type.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MetamediaTechnology/longdomap-type/issues"
+  },
+  "homepage": "https://github.com/MetamediaTechnology/longdomap-type#readme"
+}
