@@ -5,6 +5,5 @@ export default defineConfig({
   dts: true,
   format: ['esm', 'cjs'],
   sourcemap: true,
-  clean: true,
-  noExternal: ['longdomap-type']
+  clean: true
 });
