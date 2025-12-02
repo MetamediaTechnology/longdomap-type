@@ -9,7 +9,7 @@ Internal TypeScript type definitions for Longdo Map libraries. This package prov
 If you're developing a Longdo Map integration library, you can use this package as a dependency:
 
 ```bash
-npm install @longdomap/types
+npm install longdomap-type
 ```
 
 ## Usage in Libraries
@@ -24,10 +24,10 @@ export type {
   LongdoGlobal,
   LongdoMarkerProps,
   PopupOptions,
-} from "@longdomap/types";
+} from "longdomap-type";
 
 // In your composable/hook
-import type { Map, EventName } from "@longdomap/types";
+import type { Map, EventName } from "longdomap-type";
 
 export function useLongdoMap() {
   const createMap = (options: any): Map => {
@@ -51,7 +51,7 @@ export type {
   EventName as LongdoEventName,
   LongdoMarkerProps,
   PopupOptions,
-} from "@longdomap/types";
+} from "longdomap-type";
 ```
 
 ## Usage

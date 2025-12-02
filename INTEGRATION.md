@@ -1,6 +1,6 @@
 # Integration Guide for longdo-map-vue
 
-This guide shows how to integrate `@longdomap/types` into the `longdo-map-vue` library.
+This guide shows how to integrate `longdomap-type` into the `longdo-map-vue` library.
 
 ## Step 1: Install as Dependency
 
@@ -10,7 +10,7 @@ In `longdo-map-vue/package.json`:
 {
   "name": "longdo-map-vue",
   "dependencies": {
-    "@longdomap/types": "^1.0.0",
+    "longdomap-type": "^1.0.0",
     "vue": "^3.0.0"
   }
 }
@@ -21,7 +21,7 @@ In `longdo-map-vue/package.json`:
 Create `longdo-map-vue/src/types.ts`:
 
 ```typescript
-// Re-export all types from @longdomap/types
+// Re-export all types from longdomap-type
 export type {
   Map,
   EventName,
@@ -38,7 +38,7 @@ export type {
   OverlaysClickEvent,
   LongdoMap,
   LongdoLayers,
-} from "@longdomap/types";
+} from "longdomap-type";
 
 // Add Vue-specific types if needed
 export interface VueLongdoMapProps {
@@ -60,7 +60,7 @@ export { default as LongdoMap } from "./components/LongdoMap.vue";
 // Export composables
 export { useLongdoMap } from "./composables/useLongdoMap";
 
-// Re-export ALL types so users don't need to install @longdomap/types
+// Re-export ALL types so users don't need to install longdomap-type
 export type * from "./types";
 
 // Export specific commonly used types for convenience
@@ -109,5 +109,5 @@ function onMapLoad(map: Map) {
 1. **Single Installation**: Users only install `longdo-map-vue`
 2. **Full Type Safety**: All Longdo Map types available
 3. **IntelliSense**: Complete autocomplete and documentation
-4. **Maintainable**: Types are centralized in `@longdomap/types`
+4. **Maintainable**: Types are centralized in `longdomap-type`
 5. **Consistent**: Same types across all Longdo Map framework libraries

@@ -1,5 +1,5 @@
 {
-  "name": "@longdomap/types",
+  "name": "longdomap-type",
   "version": "1.0.0",
   "description": "Internal TypeScript definitions for Longdo Map libraries",
   "main": "dist/index.js",
