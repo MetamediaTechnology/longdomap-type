@@ -919,10 +919,5 @@ interface LongdoGlobal {
     Popup: LongdoMap.PopupConstructor;
     [key: string]: any;
 }
-declare global {
-    interface Window {
-        longdo: LongdoGlobal;
-    }
-}
 
 export { type CSSColor, EventName, type GeoJSONFeature, type GeoJSONGeometry, type Geometry, LineStyle, type Location, LocationMode, type LongdoGlobal, LongdoLayers, LongdoMap, type LongdoMarkerProps, type Map, type MarkerOptions, type OverlaysClickEvent, type PopupOptions, type Range, LongdoMap as default };

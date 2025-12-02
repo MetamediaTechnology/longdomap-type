@@ -76,12 +76,6 @@ export interface LongdoGlobal {
   [key: string]: any;
 }
 
-// Extend global window with proper typing
-declare global {
-  interface Window {
-    longdo: LongdoGlobal;
-  }
-}
 
 // Default export for common usage
 export default LongdoMap;
